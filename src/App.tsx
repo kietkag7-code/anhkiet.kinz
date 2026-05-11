@@ -14,6 +14,8 @@ import CustomCursor from './components/CustomCursor';
 import ThemeToggle from './components/ThemeToggle';
 import ThemeColorChanger from './components/ThemeColorChanger';
 import EasterEgg from './components/EasterEgg';
+import AnimatedNavbar from './components/AnimatedNavbar';
+import MeshGradientBackground from './components/MeshGradientBackground';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,10 +68,17 @@ function App() {
 
       {!isLoading && (
         <>
+          {/* Background */}
+          <MeshGradientBackground />
+          
+          {/* UI Components */}
           <CustomCursor />
+          <AnimatedNavbar />
           <ThemeToggle isDark={isDark} onToggle={handleThemeToggle} />
           <ThemeColorChanger onColorChange={handleColorChange} />
           <EasterEgg />
+          
+          {/* Main Content */}
           <Hero />
           <About />
           <Skills />
