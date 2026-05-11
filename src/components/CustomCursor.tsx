@@ -12,7 +12,9 @@ const CustomCursor = () => {
   const springY = useSpring(mouseY, { stiffness: 300, damping: 30 });
 
   useEffect(() => {
-    const updateMousePosition = (e) => {
+    if (typeof window === 'undefined') return;
+
+    const updateMousePosition = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
@@ -20,8 +22,9 @@ const CustomCursor = () => {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
 
-    const handleMouseOver = (e) => {
-      if (e.target.closest('button, a, [role="button"]')) {
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('button, a, [role="button"]')) {
         setIsHovering(true);
       } else {
         setIsHovering(false);

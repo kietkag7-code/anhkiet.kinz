@@ -32,7 +32,7 @@ const projects = [
   },
 ];
 
-const ProjectCard = ({ project, onClick }) => {
+const ProjectCard = ({ project, onClick }: { project: any; onClick: (p: any) => void }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -42,8 +42,8 @@ const ProjectCard = ({ project, onClick }) => {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['17.5deg', '-17.5deg']);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-17.5deg', '17.5deg']);
 
-  const handleMouseMove = (e) => {
-    const rect = e.target.getBoundingClientRect();
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
     const mouseX = e.clientX - rect.left;
@@ -89,7 +89,7 @@ const ProjectCard = ({ project, onClick }) => {
         <h3 className="text-xl font-semibold mb-2 text-white">{project.title}</h3>
         <p className="text-gray-300 mb-4">{project.description}</p>
         <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
+          {project.tech.map((tech: string) => (
             <span
               key={tech}
               className="px-2 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs rounded-full"
@@ -104,7 +104,7 @@ const ProjectCard = ({ project, onClick }) => {
 };
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   return (
     <section className="min-h-screen bg-gray-900 text-white py-20">
@@ -157,7 +157,7 @@ const Projects = () => {
               <h3 className="text-2xl font-bold mb-4">{selectedProject.title}</h3>
               <p className="text-gray-300 mb-6">{selectedProject.description}</p>
               <div className="flex flex-wrap gap-2 mb-6">
-                {selectedProject.tech.map((tech) => (
+                {selectedProject.tech.map((tech: string) => (
                   <span
                     key={tech}
                     className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full"

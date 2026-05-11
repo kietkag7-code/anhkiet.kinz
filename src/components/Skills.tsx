@@ -11,7 +11,7 @@ const skills = [
 ];
 
 const Skills = () => {
-  const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-black text-white py-20">
