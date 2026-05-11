@@ -11,9 +11,14 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
+import ThemeToggle from './components/ThemeToggle';
+import ThemeColorChanger from './components/ThemeColorChanger';
+import EasterEgg from './components/EasterEgg';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isDark, setIsDark] = useState(true);
+  const [themeColor, setThemeColor] = useState('purple');
 
   useEffect(() => {
     // Initialize Lenis for smooth scrolling
@@ -35,12 +40,26 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.classList.toggle('dark', isDark);
+    document.documentElement.setAttribute('data-theme', themeColor);
+  }, [isDark, themeColor]);
+
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
 
+  const handleThemeToggle = () => {
+    setIsDark(!isDark);
+  };
+
+  const handleColorChange = (color: string) => {
+    setThemeColor(color);
+  };
+
   return (
-    <div className="App">
+    <div className={`App ${isDark ? 'dark' : 'light'} theme-${themeColor}`}>
       <AnimatePresence>
         {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </AnimatePresence>
@@ -48,6 +67,9 @@ function App() {
       {!isLoading && (
         <>
           <CustomCursor />
+          <ThemeToggle isDark={isDark} onToggle={handleThemeToggle} />
+          <ThemeColorChanger onColorChange={handleColorChange} />
+          <EasterEgg />
           <Hero />
           <About />
           <Skills />

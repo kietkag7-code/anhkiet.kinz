@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import ThreeBackground from './ThreeBackground';
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -22,6 +23,9 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900">
+      {/* Three.js Background */}
+      <ThreeBackground />
+
       {/* Animated background particles */}
       <div className="absolute inset-0">
         {Array.from({ length: particleCount }, (_, i) => (
